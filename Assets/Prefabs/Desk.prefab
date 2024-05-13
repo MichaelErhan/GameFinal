@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8026728741714535013
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3000144898722431592}
+  - component: {fileID: 1871692020157112233}
+  - component: {fileID: 8846447602135311947}
+  - component: {fileID: 3849934735743082614}
+  m_Layer: 0
+  m_Name: Desk
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3000144898722431592
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8026728741714535013}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.000000059604645, y: 0, z: -0.00000011920929}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1871692020157112233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8026728741714535013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f920de52e8dc43346b8846a32c3e3f96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playableSide: {fileID: 0}
+  _cameraMover: {fileID: 0}
+  _chipHighlightMaterial: {fileID: 2100000, guid: 3606e8f3b16fdd648a7bde037794be95, type: 2}
+--- !u!114 &8846447602135311947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8026728741714535013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87d0993988ff3b542a91ba3685d45d20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rows: 8
+  _cols: 8
+  _cellPrefab: {fileID: 2306695819888012156, guid: 81ad0a377b454b941b9c619ce06b6424, type: 3}
+  _chipPrefab: {fileID: 945022315072071060, guid: b73f0cec7c890ff49a272d03589d8dd8, type: 3}
+--- !u!114 &3849934735743082614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8026728741714535013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18ada6b44f61bdd42b88ae7add3a7f2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _clickHandler: {fileID: 1871692020157112233}
