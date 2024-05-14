@@ -59,7 +59,11 @@ namespace Checkers
 
                     if (CheckFreeSpaceOver(nextRow, nextColumn))
                     {
-                        pairs.Add(_cells[nextColumn, nextRow]);
+                        if (Math.Sign(rowIndex) == Math.Sign(initialRowIndex) || // Проверяем, движется ли пешка в своем обычном направлении
+                            IsEnemyPawnBehind(nextRow, nextColumn, -rowIndex, -colIndex)) // или есть враг сзади для хода назад
+                        {
+                            pairs.Add(_cells[nextColumn, nextRow]);
+                        }
                     }
                     else if (CheckBorders(nextRow, nextColumn) &&
                             _cells[nextColumn, nextRow].Pair != null &&
@@ -77,6 +81,17 @@ namespace Checkers
                     }
                 }
             }
+        }
+
+        private bool IsEnemyPawnBehind(int nextRow, int nextCol, int directionRow, int directionCol)
+        {
+            int behindRow = nextRow + directionRow;
+            int behindCol = nextCol + directionCol;
+
+            if (!CheckBorders(behindRow, behindCol)) return false;
+
+            var cellBehind = _cells[behindCol, behindRow];
+            return cellBehind.Pair != null && cellBehind.Pair.Color != _playableSide.CurrentSide;
         }
 
         private bool CheckFreeSpaceOver(int nextRow, int nextColumn)
