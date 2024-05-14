@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -43,45 +44,36 @@ namespace Checkers
                 chip.Color = ColorType.WhiteQueen;
             }
         }
-        private void MoveChip(List<CellComponent> pairs, int rowIndex, int colIndex)
+
+        private void MoveChip(List<CellComponent> pairs, int initialRowIndex, int colIndex)
         {
             DestroyCandidate.Clear();
-            
-            for (int i = 0; i < 2; i++, colIndex = -colIndex)
+
+            // Проверяем все четыре диагональных направления
+            for (int rowIndex = initialRowIndex; Math.Abs(rowIndex) <= Math.Abs(initialRowIndex); rowIndex -= 2 * initialRowIndex)
             {
-                var nextRow = _currentCell.Coordinate.Y + rowIndex;
-                var nextColumn = _currentCell.Coordinate.X + colIndex;
-
-                if (CheckFreeSpaceOver(nextRow, nextColumn))
+                for (int j = 0; j < 2; j++, colIndex = -colIndex)
                 {
-                    pairs.Add(_cells[nextColumn, nextRow]);
-                }
-                else if (CheckBorders(nextRow, nextColumn) &&
-                         _cells[nextColumn, nextRow].Pair.Color != _playableSide.CurrentSide)
-                {
-                    DestroyCandidate.Add(_cells[nextColumn, nextRow].Pair);
-                    
-                    if (_playableSide.CurrentSide == ColorType.Black)
-                    {
-                        nextRow++;
-                    }
-                    else
-                    {
-                        nextRow--;
-                    }
+                    var nextRow = _currentCell.Coordinate.Y + rowIndex;
+                    var nextColumn = _currentCell.Coordinate.X + colIndex;
 
-                    if (colIndex > 0)
-                    {
-                        nextColumn++;
-                    }
-                    else
-                    {
-                        nextColumn--;
-                    }
-                    
                     if (CheckFreeSpaceOver(nextRow, nextColumn))
                     {
                         pairs.Add(_cells[nextColumn, nextRow]);
+                    }
+                    else if (CheckBorders(nextRow, nextColumn) &&
+                            _cells[nextColumn, nextRow].Pair != null &&
+                            _cells[nextColumn, nextRow].Pair.Color != _playableSide.CurrentSide)
+                    {
+                        DestroyCandidate.Add(_cells[nextColumn, nextRow].Pair);
+
+                        nextRow += rowIndex > 0 ? 1 : -1;
+                        nextColumn += colIndex > 0 ? 1 : -1;
+
+                        if (CheckFreeSpaceOver(nextRow, nextColumn))
+                        {
+                            pairs.Add(_cells[nextColumn, nextRow]);
+                        }
                     }
                 }
             }
